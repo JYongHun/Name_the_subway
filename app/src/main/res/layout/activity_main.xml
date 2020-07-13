@@ -28,7 +28,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
@@ -37,9 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="역이름을 넣으세요"
             android:inputType="textPersonName"
-            android:text=""
-            android:hint="역이름을 넣으세요"/>
+            android:text="" />
 
         <Button
             android:id="@+id/btnSearch"
@@ -48,4 +48,9 @@
             android:layout_weight="1"
             android:text="입력" />
     </LinearLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

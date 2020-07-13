@@ -6,8 +6,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     Button btnReset;
     Spinner spinner;
     ArrayList<String> tempChk = new ArrayList<String>();
+    ListView listView;
+
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
         btnSearch = (Button)findViewById(R.id.btnSearch);
         btnReset = (Button)findViewById(R.id.btnReset);
         spinner = (Spinner)findViewById(R.id.spinner);
+        listView = (ListView)findViewById(R.id.listView);
+
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,tempChk);
+
+
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,data);
+
+
 
         // Thread로 웹서버에 접속
 //        new Thread() {
@@ -63,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tempChk = new ArrayList<String>();
+                tempChk.clear();
+                adapter.clear();
+                listView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 Toast.makeText(getBaseContext(), "초기화 되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -163,9 +181,12 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
                     }
+
                     tempChk.add(editSubway.getText().toString().trim());
                     Toast.makeText(MainActivity.this,"정답입니다",Toast.LENGTH_SHORT).show();
                     emptyChk = false;
+                    listView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }// else {
 //                    Toast.makeText(MainActivity.this,"없습니다1",Toast.LENGTH_SHORT).show();
 //                }
@@ -178,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //extview.setText(s);
+
+
 
             editSubway.setText("");
             super.onPostExecute(doc);

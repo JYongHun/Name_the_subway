@@ -175,7 +175,10 @@ public class MainActivity extends AppCompatActivity {
                 NodeList subwayName = fstElmnt.getElementsByTagName("subwayStationName");
 
                 int idx = subwayName.item(0).getChildNodes().item(0).getNodeValue().indexOf("(");
-                String subwayChk = subwayName.item(0).getChildNodes().item(0).getNodeValue().substring(0, idx);
+                String subwayChk = subwayName.item(0).getChildNodes().item(0).getNodeValue();
+                if(idx != -1 ) {
+                    subwayChk = subwayName.item(0).getChildNodes().item(0).getNodeValue().substring(0, idx);
+                }
 
                 if (editSubway.getText().toString().trim().equals(subwayChk.trim())) {
                     for(int j=0;j<tempChk.size();j++) {

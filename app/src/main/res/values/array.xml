@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="my_array">
+        <item>서울 1호선</item>
+        <item>서울 2호선</item>
+        <item>서울 3호선</item>
+        <item>서울 4호선</item>
+        <item>서울 5호선</item>
+        <item>서울 6호선</item>
+        <item>서울 7호선</item>
+        <item>서울 8호선</item>
+        <item>서울 9호선</item>
+    </string-array>
+</resources>

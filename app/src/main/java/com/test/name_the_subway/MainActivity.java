@@ -77,11 +77,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 tempChk = new ArrayList<String>();
-                tempChk.clear();
                 adapter.clear();
                 listView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 Toast.makeText(getBaseContext(), "초기화 되었습니다.", Toast.LENGTH_SHORT).show();
+                adapter = new ArrayAdapter<>(MainActivity.this,android.R.layout.simple_list_item_1,tempChk);
             }
         });
 
@@ -173,7 +173,11 @@ public class MainActivity extends AppCompatActivity {
                 //s += "idx = "+  idx.item(0).getChildNodes().item(0).getNodeValue() +"\n";
 
                 NodeList subwayName = fstElmnt.getElementsByTagName("subwayStationName");
-                if (editSubway.getText().toString().trim().equals(subwayName.item(0).getChildNodes().item(0).getNodeValue())) {
+
+                int idx = subwayName.item(0).getChildNodes().item(0).getNodeValue().indexOf("(");
+                String subwayChk = subwayName.item(0).getChildNodes().item(0).getNodeValue().substring(0, idx);
+
+                if (editSubway.getText().toString().trim().equals(subwayChk.trim())) {
                     for(int j=0;j<tempChk.size();j++) {
                         if(tempChk.get(j).equals(editSubway.getText().toString().trim())) {
                             Toast.makeText(MainActivity.this,"이미 했습니다",Toast.LENGTH_SHORT).show();
@@ -182,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    tempChk.add(editSubway.getText().toString().trim());
+                    tempChk.add(subwayName.item(0).getChildNodes().item(0).getNodeValue());
                     Toast.makeText(MainActivity.this,"정답입니다",Toast.LENGTH_SHORT).show();
                     emptyChk = false;
                     listView.setAdapter(adapter);

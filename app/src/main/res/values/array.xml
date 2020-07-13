@@ -10,5 +10,30 @@
         <item>서울 7호선</item>
         <item>서울 8호선</item>
         <item>서울 9호선</item>
+        <item>경춘선</item>
+        <item>경의중앙선</item>
+        <item>분당선</item>
+        <item>수인선</item>
+        <item>경강선</item>
+        <item>인천 1호선</item>
+        <item>인천 2호선</item>
+        <item>공항철도</item>
+        <item>신분당선</item>
+        <item>서해선</item>
+        <item>공항철도</item>
+        <item>의정부경전철</item>
+        <item>에버라인</item>
+        <item>김포골드라인(안됨)</item>
+        <item>부산 1호선</item>
+        <item>부산 2호선</item>
+        <item>부산 3호선</item>
+        <item>부산 4호선</item>
+        <item>부산김해경전철</item>
+        <item>동해선</item>
+        <item>대구 1호선</item>
+        <item>대구 2호선</item>
+        <item>대구 3호선</item>
+        <item>대전 1호선</item>
+        <item>광주 1호선</item>
     </string-array>
 </resources>

@@ -7,11 +7,24 @@
     tools:context=".MainActivity"
     android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:entries="@array/my_array"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/my_array" />
+
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="초기화" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

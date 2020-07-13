@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editSubway;
     Button btnSearch;
+    Button btnReset;
     Spinner spinner;
     ArrayList<String> tempChk = new ArrayList<String>();
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         editSubway = (EditText)findViewById(R.id.editSubway);
         btnSearch = (Button)findViewById(R.id.btnSearch);
+        btnReset = (Button)findViewById(R.id.btnReset);
         spinner = (Spinner)findViewById(R.id.spinner);
 
         // Thread로 웹서버에 접속
@@ -57,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        }.start();
 
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempChk = new ArrayList<String>();
+                Toast.makeText(getBaseContext(), "초기화 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 new GetXMLTask().execute();
+
             }
         });
 
@@ -126,8 +136,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Document doc) {
 
-            String s = "";
+//            String s = "";
             NodeList nodeList = doc.getElementsByTagName("item");
+            boolean emptyChk = true;
 
             for(int i = 0; i< nodeList.getLength(); i++){
 
@@ -137,21 +148,23 @@ public class MainActivity extends AppCompatActivity {
                 NodeList subwayRoute = fstElmnt.getElementsByTagName("subwayRouteName");
                 //선택한것이 아니면 리턴함
                 if (!spinner.getSelectedItem().toString().equals(subwayRoute.item(0).getChildNodes().item(0).getNodeValue())) {
-                    //Toast.makeText(MainActivity.this,"없습니다",Toast.LENGTH_SHORT).show();
-                    break;
+                    //Toast.makeText(MainActivity.this,"없을수도있습니다",Toast.LENGTH_SHORT).show();
+                    //emptyChk = true;
+                    continue;
                 }
                 //s += "idx = "+  idx.item(0).getChildNodes().item(0).getNodeValue() +"\n";
 
                 NodeList subwayName = fstElmnt.getElementsByTagName("subwayStationName");
                 if (editSubway.getText().toString().trim().equals(subwayName.item(0).getChildNodes().item(0).getNodeValue())) {
                     for(int j=0;j<tempChk.size();j++) {
-                        if(tempChk.get(i).equals(editSubway.getText().toString().trim())) {
+                        if(tempChk.get(j).equals(editSubway.getText().toString().trim())) {
                             Toast.makeText(MainActivity.this,"이미 했습니다",Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
                     tempChk.add(editSubway.getText().toString().trim());
                     Toast.makeText(MainActivity.this,"정답입니다",Toast.LENGTH_SHORT).show();
+                    emptyChk = false;
                 } else {
                     Toast.makeText(MainActivity.this,"없습니다",Toast.LENGTH_SHORT).show();
                 }
@@ -159,9 +172,13 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
+            if(emptyChk){
+                Toast.makeText(MainActivity.this,"없습니다",Toast.LENGTH_SHORT).show();
+            }
 
             //extview.setText(s);
 
+            editSubway.setText("");
             super.onPostExecute(doc);
         }
     }

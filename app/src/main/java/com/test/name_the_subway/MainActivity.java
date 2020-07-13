@@ -159,21 +159,22 @@ public class MainActivity extends AppCompatActivity {
                     for(int j=0;j<tempChk.size();j++) {
                         if(tempChk.get(j).equals(editSubway.getText().toString().trim())) {
                             Toast.makeText(MainActivity.this,"이미 했습니다",Toast.LENGTH_SHORT).show();
+                            editSubway.setText("");
                             return;
                         }
                     }
                     tempChk.add(editSubway.getText().toString().trim());
                     Toast.makeText(MainActivity.this,"정답입니다",Toast.LENGTH_SHORT).show();
                     emptyChk = false;
-                } else {
-                    Toast.makeText(MainActivity.this,"없습니다",Toast.LENGTH_SHORT).show();
-                }
+                }// else {
+//                    Toast.makeText(MainActivity.this,"없습니다1",Toast.LENGTH_SHORT).show();
+//                }
                 //s += "gugun = "+  gugun.item(0).getChildNodes().item(0).getNodeValue() +"\n";
 
 
             }
             if(emptyChk){
-                Toast.makeText(MainActivity.this,"없습니다",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"없습니다2",Toast.LENGTH_SHORT).show();
             }
 
             //extview.setText(s);
